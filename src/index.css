@@ -1,13 +1,13 @@
-minimal-select {
+web-component-select {
   position: relative;
 }
 
-minimal-select>input {
+web-component-select>input {
   padding: 0.5rem 1rem;
   font-size: 1rem;
 }
 
-minimal-select>div {
+web-component-select>div {
   top: 2rem;
   left: 0;
   width: 100%;
@@ -21,17 +21,17 @@ minimal-select>div {
   background-color: white;
 }
 
-minimal-select.active>div {
+web-component-select.active>div {
   opacity: 1;
   pointer-events: auto;
 }
 
-minimal-select>div>div {
+web-component-select>div>div {
   cursor: pointer;
   padding: 0.5rem 1rem;
   transition: background-color 0.2s ease;
 }
 
-minimal-select>div>div:hover {
+web-component-select>div>div:hover {
   background-color: #f5f5f5;
 }

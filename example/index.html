@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Example</title>
-  <link rel="stylesheet" href="../dist/css/minimal-select.min.css">
+  <link rel="stylesheet" href="../dist/css/web-component-select.min.css">
   <style>
     body {
       font-size: 18px;
@@ -21,7 +21,7 @@
 <body>
   <main>
     <h1>Example of the select</h1>
-    <minimal-select name="selected-value" value="3" placeholder="Search" aria-placeholder="Search">
+    <web-component-select name="selected-value" value="3" placeholder="Search" aria-placeholder="Search">
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
       <option value="3">Option 3</option>
@@ -32,15 +32,15 @@
       <option value="8">Option 8</option>
       <option value="9">Option 9</option>
       <option value="10">Option 10</option>
-    </minimal-select>
+    </web-component-select>
     <hr />
     <p>Selected value: <span id="selected-value"></span></p>
   </main>
 
-  <script src="../dist/js/minimal-select.min.js"></script>
+  <script src="../dist/js/web-component-select.min.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const select = document.querySelector("minimal-select");
+      const select = document.querySelector("web-component-select");
       const selectedValue = document.querySelector("#selected-value");
 
       select.addEventListener("onchange", event => {

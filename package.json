@@ -1,6 +1,6 @@
 {
   "name": "web-component-select",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Minimal JavaScript select with no dependencies",
   "main": "src/index.js",
   "scripts": {

@@ -1,4 +1,4 @@
-class MinimalSelect extends HTMLElement {
+class WebComponentSelect extends HTMLElement {
   #options = [];
   #valueInput;
   #searchInput;
@@ -105,4 +105,4 @@ class MinimalSelect extends HTMLElement {
   }
 }
 
-window.customElements.define("minimal-select", MinimalSelect);
+window.customElements.define("web-component-select", WebComponentSelect);

@@ -1,16 +1,16 @@
-# minimal-select
+# Web Component Select
 
 ## Minimal web component select with no dependencies
 
 To use the library just add styles and JavaScript
 ```
-<link rel="stylesheet" href="...minimal-select.min.css">
-<script src="...minimal-select.min.js"></script>
+<link rel="stylesheet" href="...web-component-select.min.css">
+<script src="...web-component-select.min.js"></script>
 ```
 
 Then you can use select
 ```
-<minimal-select name="selected-value" value="3" placeholder="Search" aria-placeholder="Search">
+<web-component-select name="selected-value" value="3" placeholder="Search" aria-placeholder="Search">
   <option value="1">Option 1</option>
   <option value="2">Option 2</option>
   <option value="3">Option 3</option>
@@ -21,5 +21,5 @@ Then you can use select
   <option value="8">Option 8</option>
   <option value="9">Option 9</option>
   <option value="10">Option 10</option>
-</minimal-select>
+</web-component-select>
 ```
