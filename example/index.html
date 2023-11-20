@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Example</title>
+  <link rel="stylesheet" href="../dist/css/minimal-select.min.css">
+  <style>
+    body {
+      font-size: 18px;
+    }
+
+    main {
+      margin: 0 auto;
+      padding: 0 1rem;
+      max-width: 800px;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <h1>Example of the select</h1>
+    <minimal-select name="selected-value" value="3" placeholder="Search" aria-placeholder="Search">
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+      <option value="4">Option 4</option>
+      <option value="5">Option 5</option>
+      <option value="6">Option 6</option>
+      <option value="7">Option 7</option>
+      <option value="8">Option 8</option>
+      <option value="9">Option 9</option>
+      <option value="10">Option 10</option>
+    </minimal-select>
+    <hr />
+    <p>Selected value: <span id="selected-value"></span></p>
+  </main>
+
+  <script src="../dist/js/minimal-select.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const select = document.querySelector("minimal-select");
+      const selectedValue = document.querySelector("#selected-value");
+
+      select.addEventListener("onchange", event => {
+        selectedValue.innerText = event.detail.value;
+      });
+    });
+  </script>
+</body>
+
+</html>
