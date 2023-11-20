@@ -39,9 +39,21 @@ class WebComponentSelect extends HTMLElement {
   }
 
   #createSearchInput() {
+    const ignoreAttributes = ["placeholder"];
     this.#searchInput = document.createElement("input");
+
+    console.log(this.getAttributeNames());
+    this.getAttributeNames().forEach(attrName => {
+      if (!ignoreAttributes.includes(attrName)) {
+        this.#searchInput.setAttribute(attrName, this.getAttribute(attrName));
+        this.removeAttribute(attrName);
+      }
+    });
+
     this.#searchInput.setAttribute("type", "text");
-    this.#searchInput.setAttribute("placeholder", this.getAttribute("placeholder"));
+    this.#searchInput.setAttribute("placeholder", this.getAttribute("placeholder") || "Search...");
+    this.removeAttribute("placeholder");
+
     this.#searchInput.addEventListener("click", this.#showOptions.bind(this));
     this.#searchInput.addEventListener("focus", this.#showOptions.bind(this));
     this.#searchInput.addEventListener("input", this.#filterOptions.bind(this));
@@ -58,7 +70,7 @@ class WebComponentSelect extends HTMLElement {
         option.setAttribute("data-value", this.childNodes[i].getAttribute("value"));
         option.addEventListener("click", e => {
           this.#valueInput.value = e.target.dataset.value;
-          this.#searchInput.value = e.target.innerHTML;
+          this.#searchInput.value = e.target.innerHTML.trim();
 
           const changeEvent = new CustomEvent("onchange", {
             detail: {
