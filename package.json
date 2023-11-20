@@ -1,0 +1,31 @@
+{
+  "name": "web-component-select",
+  "version": "0.1.0",
+  "description": "Minimal JavaScript select with no dependencies",
+  "main": "src/index.js",
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build:css": "npx esbuild src/index.css --bundle --minify --outfile=dist/css/web-component-select.min.css",
+    "build:js": "npx esbuild src/index.js --bundle --minify --sourcemap --outfile=dist/js/web-component-select.min.js",
+    "build": "NODE_ENV=production npm run build:css && npm run build:js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:pashaproton/web-component-select.git"
+  },
+  "keywords": [
+    "css",
+    "html",
+    "select",
+    "minimal",
+    "component",
+    "javascript",
+    "webcomponent"
+  ],
+  "author": "Pavlo Ivanichenko <pasha.proton@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pashaproton/minimal-select/issues"
+  },
+  "homepage": "https://github.com/pashaproton/minimal-select#readme"
+}
