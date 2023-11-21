@@ -42,7 +42,6 @@ class WebComponentSelect extends HTMLElement {
     const ignoreAttributes = ["placeholder"];
     this.#searchInput = document.createElement("input");
 
-    console.log(this.getAttributeNames());
     this.getAttributeNames().forEach(attrName => {
       if (!ignoreAttributes.includes(attrName)) {
         this.#searchInput.setAttribute(attrName, this.getAttribute(attrName));
