@@ -20,26 +20,48 @@
 
 <body>
   <main>
-    <h1>Example of the select</h1>
-    <label for="search">Search</label>
-    <web-component-select name="search" value="3" placeholder="Type to search" id="search" required>
-      <option value="1">Option 1</option>
-      <option value="2">Option 2</option>
-      <option value="3">Option 3</option>
-      <option value="4">Option 4</option>
-      <option value="5">Option 5</option>
-      <option value="6">Option 6</option>
-      <option value="7">Option 7</option>
-      <option value="8">Option 8</option>
-      <option value="9">Option 9</option>
-      <option value="10">Option 10</option>
-    </web-component-select>
-    <hr />
-    <p>Selected value: <span id="selected-value"></span></p>
+    <section>
+      <h1>Example of the select</h1>
+      <label for="search">Search</label>
+      <web-component-select name="search" value="3" placeholder="Type to search" id="search" required>
+        <option value="1">Option 1</option>
+        <option value="2">Option 2</option>
+        <option value="3">Option 3</option>
+        <option value="4">Option 4</option>
+        <option value="5">Option 5</option>
+        <option value="6">Option 6</option>
+        <option value="7">Option 7</option>
+        <option value="8">Option 8</option>
+        <option value="9">Option 9</option>
+        <option value="10">Option 10</option>
+      </web-component-select>
+      <hr />
+      <p>Selected value: <span id="selected-value"></span></p>
+    </section>
+    <section>
+      <h1>Example of the select with custon "not found" option</h1>
+      <web-component-select name="search" value="8" placeholder="Type to search" id="search" required>
+        <option data-not-found click="alert('Looks like you didn\'t find anything...')">
+          Click me to display alert!
+        </option>
+        <option value="1">Option 1</option>
+        <option value="2">Option 2</option>
+        <option value="3">Option 3</option>
+        <option value="4">Option 4</option>
+        <option value="5">Option 5</option>
+        <option value="6">Option 6</option>
+        <option value="7">Option 7</option>
+        <option value="8">Option 8</option>
+        <option value="9">Option 9</option>
+        <option value="10">Option 10</option>
+      </web-component-select>
+    </section>
   </main>
 
   <script src="../dist/js/web-component-select.min.js"></script>
   <script>
+
+
     document.addEventListener("DOMContentLoaded", function () {
       const select = document.querySelector("web-component-select");
       const selectedValue = document.querySelector("#selected-value");

@@ -2,6 +2,8 @@ class WebComponentSelect extends HTMLElement {
   #options = [];
   #valueInput;
   #searchInput;
+  #optionsWrapp;
+  #notFoundOption;
   #optionStyleDisplay;
 
   constructor() {
@@ -20,6 +22,7 @@ class WebComponentSelect extends HTMLElement {
 
   #filterOptions(e) {
     const value = e.target.value.toLowerCase();
+
     this.#options.forEach(option => {
       if (option.innerHTML.toLowerCase().includes(value)) {
         option.style.display = this.#optionStyleDisplay;
@@ -27,6 +30,17 @@ class WebComponentSelect extends HTMLElement {
         option.style.display = "none";
       }
     });
+
+    if (
+      value.length > 0
+      && this.#options
+        .filter(option => !option.hasAttribute('data-not-found'))
+        .every(option => option.style.display === "none")
+    ) {
+      this.#notFoundOption.style.display = this.#optionStyleDisplay;
+    } else {
+      this.#notFoundOption.style.display = "none";
+    }
   }
 
   #createValueInput() {
@@ -60,29 +74,45 @@ class WebComponentSelect extends HTMLElement {
   }
 
   #createOptions() {
-    const optionsWrapp = document.createElement("div");
+    this.#optionsWrapp = document.createElement("div");
 
     for (let i = 0; i < this.childNodes.length; i++) {
       if (this.childNodes[i].tagName === "OPTION") {
         const option = document.createElement("div");
         option.innerHTML = this.childNodes[i].innerHTML;
         option.setAttribute("data-value", this.childNodes[i].getAttribute("value"));
-        option.addEventListener("click", e => {
-          this.#valueInput.value = e.target.dataset.value;
-          this.#searchInput.value = e.target.innerHTML.trim();
 
-          const changeEvent = new CustomEvent("onchange", {
-            detail: {
-              value: e.target.dataset.value
-            }
+        if (this.childNodes[i].hasAttribute("data-not-found")) {
+          // option.click = this.childNodes[i].click;
+          option.setAttribute("data-not-found", "");
+
+          if (this.childNodes[i].hasAttribute("click")) {
+            option.setAttribute("click", this.childNodes[i].getAttribute("click"));
+
+            option.addEventListener("click", e => {
+              const click = new Function(e.target.getAttribute("click"));
+              click();
+            });
+          }
+        } else {
+          option.addEventListener("click", e => {
+            this.#valueInput.value = e.target.dataset.value;
+            this.#searchInput.value = e.target.innerHTML.trim();
+
+            const changeEvent = new CustomEvent("onchange", {
+              detail: {
+                value: e.target.dataset.value
+              }
+            });
+            this.dispatchEvent(changeEvent);
+
+            window.setTimeout(() => {
+              this.#resetOptions();
+            }, 200);
           });
-          this.dispatchEvent(changeEvent);
+        }
 
-          window.setTimeout(() => {
-            this.#resetOptions();
-          }, 200);
-        });
-        optionsWrapp.appendChild(option);
+        this.#optionsWrapp.appendChild(option);
         this.#options.push(option);
         this.#optionStyleDisplay = option.style.display;
 
@@ -94,13 +124,27 @@ class WebComponentSelect extends HTMLElement {
       }
     }
 
-    this.appendChild(optionsWrapp);
+    this.appendChild(this.#optionsWrapp);
+  }
+
+  #createNotFoundOption() {
+    this.#notFoundOption = this.#optionsWrapp.querySelector("[data-not-found]");
+
+    if (!this.#notFoundOption) {
+      this.#notFoundOption = document.createElement("div");
+      this.#notFoundOption.innerHTML = "Not found";
+      this.#notFoundOption.setAttribute("data-not-found", "");
+    }
+
+    this.#notFoundOption.style.display = "none";
+    this.#optionsWrapp.appendChild(this.#notFoundOption);
   }
 
   connectedCallback() {
     this.#createValueInput();
     this.#createSearchInput();
     this.#createOptions();
+    this.#createNotFoundOption();
 
     document.addEventListener("click", (e) => {
       if (e.target !== this.#searchInput) {
